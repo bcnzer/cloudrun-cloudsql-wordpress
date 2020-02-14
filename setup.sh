@@ -7,12 +7,12 @@ USER_PSWD=<TODO> # For the "wordpress" user, enter a password of your choice. So
 PROJECT_NAME=<TODO> # Your project name. You can see it in the URL of the portal i.e. https://console.cloud.google.com/run?project=my-cr-project&folder=&organizationId= then the project is "my-cr-project"
 REGION=us-central1 # Feel free to set this to wahtever you like BUT be aware that, as of this writing, Cloud Run is not available everywhere. Full list of regions is here: https://cloud.google.com/compute/docs/regions-zones
 ZONE=us-central1-a # Once again, set it to whatever you like. See above link for the available zones
-CLOUDSQL_INSTANCE_CONNECTION_NAME="$PROJECT_NAME:$REGION:$DBNAME" # The specific instance name we need later on
+CLOUDSQL_INSTANCE_CONNECTION_NAME="$PROJECT_NAME:$REGION:$CLOUDSQL_INSTANCE" # The specific instance name we need later on
 
 # Setup basic config
-gcloud config set core/project $PROJECT_NAME 
-gcloud config set compute/region $REGION 
-gcloud config set compute/zone us-central1-a
+gcloud config set core/project $PROJECT_NAME
+gcloud config set compute/region $REGION
+gcloud config set compute/zone $ZONE
 
 # Create a minimal (micro) MySQL instance
 gcloud sql instances create $CLOUDSQL_INSTANCE --tier=db-f1-micro --region=us-central1
@@ -29,7 +29,7 @@ gcloud sql users create $DB_USER --host=% --instance=$CLOUDSQL_INSTANCE --passwo
 # Build your first WordPress image and submit it to GCP Container Repository. Note this is explictly tagged as v1
 gcloud builds submit --tag gcr.io/$PROJECT_NAME/wordpress:v1
 
-# Using that 
+# Using that
 gcloud run deploy wordpress --image gcr.io/$PROJECT_NAME/wordpress:v1 \
 --add-cloudsql-instances wp-mysql \
 --update-env-vars DB_HOST='127.0.0.1',DB_NAME=$DBNAME,DB_USER=$DB_USER,DB_PASSWORD=$USER_PSWD,CLOUDSQL_INSTANCE=$CLOUDSQL_INSTANCE_CONNECTION_NAME \
