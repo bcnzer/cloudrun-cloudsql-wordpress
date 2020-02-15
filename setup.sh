@@ -3,6 +3,7 @@ PROJECT_NAME=<TODO> # Your project name. You can see it in the URL of the portal
 CLOUDSQL_INSTANCE=wp-mysql # This is the instance name - sorta like the MySQL install which can then have many databases in it. You're welcome to change it
 CLOUDSQL_TIER=db-f1-micro # I'm using the smallest MySQL instance. A full list is available here: https://cloud.google.com/sql/pricing#2nd-gen-pricing
 DBNAME=wordpress # The actual database. You're welcome to call it something different
+CLOUDSQL_TIER=db-f1-micro # I'm using the smallest MySQL instance. A full list is available here: https://cloud.google.com/sql/pricing#2nd-gen-pricing
 ROOT_PSWD=<TODO> # Enter a root password of your choice. Something strong!
 DB_USER=wordpress # You're welcome to change this if you like
 USER_PSWD=<TODO> # For the "wordpress" user, enter a password of your choice. Something strong!
