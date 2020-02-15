@@ -32,6 +32,6 @@ gcloud builds submit --tag gcr.io/$PROJECT_NAME/wordpress:v1
 
 # Using that
 gcloud run deploy wordpress --image gcr.io/$PROJECT_NAME/wordpress:v1 \
---add-cloudsql-instances wp-mysql \
+--add-cloudsql-instances $CLOUDSQL_INSTANCE \
 --update-env-vars DB_HOST='127.0.0.1',DB_NAME=$DBNAME,DB_USER=$DB_USER,DB_PASSWORD=$USER_PSWD,CLOUDSQL_INSTANCE=$CLOUDSQL_INSTANCE_CONNECTION_NAME \
 --platform=managed
