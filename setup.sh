@@ -1,4 +1,4 @@
-# My variables
+# Variables used in this script. Change anything with a value of <TODO>
 CLOUDSQL_INSTANCE=wp-mysql # This is the instance name - sorta like the MySQL install which can then have many databases in it. You're welcome to change it
 DBNAME=wordpress # The actual database. You're welcome to call it something different
 ROOT_PSWD=<TODO> # Enter a root password of your choice. Something strong!
