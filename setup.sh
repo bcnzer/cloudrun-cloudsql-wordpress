@@ -1,6 +1,7 @@
 # Variables used in this script. Change anything with a value of <TODO>
 CLOUDSQL_INSTANCE=wp-mysql # This is the instance name - sorta like the MySQL install which can then have many databases in it. You're welcome to change it
 DBNAME=wordpress # The actual database. You're welcome to call it something different
+CLOUDSQL_TIER=db-f1-micro # I'm using the smallest MySQL instance. A full list is available here: https://cloud.google.com/sql/pricing#2nd-gen-pricing
 ROOT_PSWD=<TODO> # Enter a root password of your choice. Something strong!
 DB_USER=wordpress # You're welcome to change this if you like
 USER_PSWD=<TODO> # For the "wordpress" user, enter a password of your choice. Something strong!
@@ -15,7 +16,7 @@ gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
 
 # Create a minimal (micro) MySQL instance
-gcloud sql instances create $CLOUDSQL_INSTANCE --tier=db-f1-micro --region=us-central1
+gcloud sql instances create $CLOUDSQL_INSTANCE --tier=$CLOUDSQL_TIER --region=us-central1
 gcloud sql users set-password root --host % --instance $CLOUDSQL_INSTANCE --password $ROOT_PSWD
 
 # Create a database called "wordpress" and create a user account
